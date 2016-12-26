@@ -1,0 +1,56 @@
+\renewcommand{\sect}{101 Hardwareeinstellungen}
+
+\cardfrontfoot{\chap/\sect}
+
+\begin{flashcard}[Information]{Kernel-Version Identifizieren}
+	\begin{itemize}
+		\item Command: \texttt{uname -r}. Output: Kernel-Version
+		\item \texttt{/lib/modules} \textrightarrow\ Kernel Historie
+		\item \texttt{/usr/src/<KERNEL-VERSION>} \textrightarrow\ Source Code
+	\end{itemize}
+\end{flashcard}
+
+\begin{flashcard}[Information]{Kernel-Version Codierung}
+	\textbf{Beispiel}: 2.6.11.4-21.9-smp
+	\begin{description}
+		\item [1. Ziffer] Major release
+		\item [2. Ziffer] Minor release
+			\item Gerade Ziffern \textrightarrow\ Stable, Ungerade Ziffern \textrightarrow\ Developer Kernel
+		\item [3. Ziffer] Patch-Level
+		\item [Darauffolgende Ziffern] Bezeichnung, die im Makefile angegeben werden kann.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{lsmod}
+	Status der Module eines laufenden Kernels anzeigen.
+	\begin{description}
+		\item Greift auf \texttt{/proc/modules} zu
+		\item [Example] \texttt{lsmod}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{modinfo}
+	Ein Modul des Kernels genauer unter die Lupe nehmen.
+	\begin{description}
+		\item  [Example] \texttt{modinfo storage}
+		\item [Options]
+			\item \texttt{-a} Autor 
+			\item \texttt{-d} Beschreibung (description) 
+			\item \texttt{-l} Lizenz
+			\item \texttt{-p} Zu übergebende Parameter, falls möglich
+			\item \texttt{-n} Namen der Datei
+	\end{description}
+\end{flashcard}
+	
+\begin{flashcard}[Command]{insmod}
+	Ein Modul in den laufenden Kernel integrieren
+	\begin{description}
+		\item  [Example] \texttt{modinfo storage}
+		\item [Options]
+			\item \texttt{-a} Autor 
+			\item \texttt{-d} Beschreibung (description) 
+			\item \texttt{-l} Lizenz
+			\item \texttt{-p} Zu übergebende Parameter, falls möglich
+			\item \texttt{-n} Namen der Datei
+	\end{description}
+\end{flashcard}

@@ -1,0 +1,203 @@
+% General Header
+\documentclass[card, frame]{flashcards}
+
+% Data encoding
+\usepackage[utf8]{inputenc}
+
+% Geometry
+\geometry{landscape}
+\geometry{margin=0pt}
+\setlength{\textwidth}{\paperwidth}
+\setlength{\textheight}{\paperheight}
+
+% Language Package
+\usepackage[UKenglish]{babel}
+\usepackage[english]{varioref}
+
+% Packages
+\usepackage{amssymb, amsmath, cite, empheq, etex, fancybox,float, floatflt, graphicx, lastpage,longtable, marginnote, multicol, multirow, wrapfig, verbatim, rotating, pdflscape,array, scrextend, subcaption, titlesec, xfrac, cases}
+
+% Colours
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\textbf{\color{red}{TO DO: #1}}}
+
+%% Including PDF's
+\usepackage{pdfpages}
+
+%% Reading csv files
+\usepackage{csvsimple}
+
+%% Hyperref with linebreak for url
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[colorlinks=true, linkcolor=red, urlcolor=blue]{hyperref}
+
+%% Tikz/circuitikz settings
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{arrows,circuits.ee.IEC,calc,patterns,decorations.pathmorphing,decorations.markings}
+\tikzset{>=latex}
+
+%% pgfplots
+\usepackage{pgfplots}
+
+% normal distribution: use as \addplot{gauss(mu,sigma)}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+%% Change font to Helvetica
+\usepackage{helvet}
+
+%% Change headings font
+\addtokomafont{disposition}{\color{blue!60!black}\rmfamily\bfseries\scshape}
+
+% Adjusting boxes and graphics
+\usepackage[export]{adjustbox}
+
+%% Captions
+\usepackage[labelfont=bf,justification=centering]{caption}
+
+
+%% Source Code Listings
+\usepackage{listings}
+% Listings Captions
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+% using captions: \begin{lstlisting}[label = some-code, caption = some code]...\end{lstlisting}
+
+%% MATLAB 
+\lstdefinestyle{matlab}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=single,
+  xleftmargin=\parindent,
+  numbers = left,
+  language=Matlab,
+  commentstyle=\bfseries\color{green!80!black},
+  showstringspaces=false,
+  basicstyle=\scriptsize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  morekeywords = {parfor},
+  morekeywords = {ones},
+  morekeywords = {cdescentCycle},
+  morekeywords = {thresholdScreen},
+  morekeywords = {clearvars},
+  morekeywords = {allcombs},
+  morekeywords = {lasso},
+  morekeywords = {strcmpi},
+  morekeywords = {normrnd},
+  morekeywords = {cvx_begin},
+  morekeywords = {quiet},
+  morekeywords = {cvx_end},
+  morekeywords = {variables},
+  morekeywords = {minimize},
+  morekeywords = {square_pos},
+  morekeywords = {psoptimset},
+  morekeywords = {patternsearch},
+  morekeywords = {plotyy},
+  morekeywords = {dimensions},
+  morekeywords = {parameters},
+  morekeywords = {scatter3},
+  deletekeywords = {beta},
+  deletekeywords = {gamma},
+%  commentstyle=\itshape\color{purple!40!black},
+%  identifierstyle=\color{blue},
+  stringstyle=\color{pink!85!yellow!80!red},
+  rulecolor=\color{black}
+}
+%\lstset{morecomment=[l]{//}}
+
+%% bash 
+\lstdefinestyle{bash}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  postbreak={\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}},
+  frame=single,
+  xleftmargin=\parindent,
+  numbers = left,
+  language=bash,
+  commentstyle=\bfseries\color{green!80!black},
+  showstringspaces=false,
+  basicstyle=\scriptsize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+%  commentstyle=\itshape\color{purple!40!black},
+%  identifierstyle=\color{blue},
+  stringstyle=\color{pink!85!yellow!80!red},
+  rulecolor=\color{black}
+}
+
+%% C 
+\lstdefinestyle{c}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=single,
+  xleftmargin=\parindent,
+  numbers = left,
+  language=C,
+  commentstyle=\bfseries\color{green!80!black},
+  showstringspaces=false,
+  basicstyle=\scriptsize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+%  commentstyle=\itshape\color{purple!40!black},
+%  identifierstyle=\color{blue},
+  stringstyle=\color{pink!85!yellow!80!red},
+  rulecolor=\color{black}
+}
+%\lstset{morecomment=[l]{//}}
+
+\newcommand{\matlab}[1]{\texttt{#1}}
+
+%% Maths operators
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\PolyGrad}{PolyGrad}
+
+\newcommand{\unit}[1]{\mathrm{#1}}
+
+% commmand for argmin
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+
+% "d" in differentials
+\newcommand*{\diff}{\mathop{}\!\mathrm{d}}
+
+
+% Fouriertransformationen
+\unitlength1cm
+\newcommand{\FT}
+{
+\begin{picture}(1,0.5)
+\put(0.2,0.1){\circle{0.14}}\put(0.27,0.1){\line(1,0){0.5}}\put(0.77,0.1){\circle*{0.14}}
+\end{picture}
+}
+
+
+\newcommand{\IFT}
+{
+\begin{picture}(1,0.5)
+\put(0.2,0.1){\circle*{0.14}}\put(0.27,0.1){\line(1,0){0.45}}\put(0.77,0.1){\circle{0.14}}
+\end{picture}
+}
+
+
+
+
+%% General settings
+
+%PDF Info
+\hypersetup{pdfauthor={\authorinfo},pdftitle={\titleinfo}, linktoc=all}
+\author{\authorinfo}
+\title{\titleinfo}
+
+%% Line height in tables
+\newcommand{\arraystretchOriginal}{1.5}
+\renewcommand{\arraystretch}{\arraystretchOriginal}
+
+
+%% Header and footer
+\cardfrontstyle[\large\slshape]{headings}
