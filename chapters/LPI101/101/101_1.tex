@@ -3,54 +3,179 @@
 \cardfrontfoot{\chap/\sect}
 
 \begin{flashcard}[Information]{Kernel-Version Identifizieren}
+	Mehrere Möglichkeiten, wie z.B.:
 	\begin{itemize}
-		\item Command: \texttt{uname -r}. Output: Kernel-Version
-		\item \texttt{/lib/modules} \textrightarrow\ Kernel Historie
-		\item \texttt{/usr/src/<KERNEL-VERSION>} \textrightarrow\ Source Code
+		\item Command: \texttt{uname -r}. Output: Kernel-Version.
+		\item \texttt{/lib/modules} \textrightarrow\ Kernel Historie.
+		\item \texttt{/usr/src/<KERNEL-VERSION>} \textrightarrow\ Source Code.
 	\end{itemize}
 \end{flashcard}
 
 \begin{flashcard}[Information]{Kernel-Version Codierung}
 	\textbf{Beispiel}: 2.6.11.4-21.9-smp
 	\begin{description}
-		\item [1. Ziffer] Major release
-		\item [2. Ziffer] Minor release
-			\item Gerade Ziffern \textrightarrow\ Stable, Ungerade Ziffern \textrightarrow\ Developer Kernel
-		\item [3. Ziffer] Patch-Level
+		\item [1. Ziffer] Major release.
+		\item [2. Ziffer] Minor release.
+			\item Gerade Ziffern \textrightarrow\ Stable, Ungerade Ziffern \textrightarrow\ Developer Kernel.
+		\item [3. Ziffer] Patch-Level.
 		\item [Darauffolgende Ziffern] Bezeichnung, die im Makefile angegeben werden kann.
 	\end{description}
 \end{flashcard}
 
 \begin{flashcard}[Command]{lsmod}
 	Status der Module eines laufenden Kernels anzeigen.
+	
 	\begin{description}
-		\item Greift auf \texttt{/proc/modules} zu
-		\item [Example] \texttt{lsmod}
+		\item Greift auf \texttt{/proc/modules} zu.
+		\item [Example] \texttt{lsmod}.
 	\end{description}
 \end{flashcard}
 
 \begin{flashcard}[Command]{modinfo}
 	Ein Modul des Kernels genauer unter die Lupe nehmen.
+	
 	\begin{description}
 		\item  [Example] \texttt{modinfo storage}
-		\item [Options]
+		\item \textbf{Options}
+		
+		\begin{description}
 			\item \texttt{-a} Autor 
 			\item \texttt{-d} Beschreibung (description) 
 			\item \texttt{-l} Lizenz
 			\item \texttt{-p} Zu übergebende Parameter, falls möglich
 			\item \texttt{-n} Namen der Datei
+		\end{description}
 	\end{description}
 \end{flashcard}
 	
 \begin{flashcard}[Command]{insmod}
-	Ein Modul in den laufenden Kernel integrieren
+	Ein Modul in den laufenden Kernel integrieren.
 	\begin{description}
-		\item  [Example] \texttt{modinfo storage}
-		\item [Options]
-			\item \texttt{-a} Autor 
-			\item \texttt{-d} Beschreibung (description) 
-			\item \texttt{-l} Lizenz
-			\item \texttt{-p} Zu übergebende Parameter, falls möglich
-			\item \texttt{-n} Namen der Datei
+		\item Benötigt Pfadangabe.
+		\item Abhängigkeiten werden geprüft, aber nicht aufgelöst. \textrightarrow\ Fehlermeldung.
+		\item Im Erfolgsfall keine Bestätigungsmeldung.
+		\item  [Example] \texttt{insmod} \path{PATH_TO/usb-storage.ko}
+		\item \textbf{Options}
+		
+		\begin{description}
+			\item \todo{options here}
+		\end{description}
 	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{rmmod}
+	Ein Modul aus dem laufenden Kernel entfernen.
+	\begin{description}
+		\item Keine Pfadangabe nötig (arbeitet mit \path{/proc/modules}).
+		\item Im Erfolgsfall keine Bestätigungsmeldung.
+		\item Abhängigkeiten werden überprüft \textrightarrow\ Fehlermeldung wenn angegebenes Modul von anderem Modul benötigt wird.
+		\item  [Example] \texttt{rmmod usb-storage}
+		\item \textbf{Options}
+		
+		\begin{description}
+			\item \texttt{-v} Verbose
+			\item \texttt{-f} Entladen erzwingen (force), auch wenn Abhängigkeiten nicht erfüllt
+		\end{description}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{modprobe}
+	Optimierte Kombination von insmod und rmmod.
+	\begin{description}
+		\item Kann Abhängigkeitsprobleme auch beheben.
+		\item Keine Pfadangabe nötig. (Benutzt \texttt{uname -r}).
+		\item Kann alle Module eines Typs laden.
+		\item Im Erfolgsfall keine Bestätigungsmeldung. Nur im Fehlerfall.
+		\item  [Example] \texttt{modprobe -at net}: 
+		\item \textbf{Options}
+		
+		\begin{description}
+			\item \texttt{-a} Alle Module
+			\item \texttt{-t} Typ des Moduls
+			\item \texttt{-r} Remove
+			\item \texttt{-l} Alle ladbaren Module auflisten. (Deprecated).
+			\item \texttt{-lt} Auflisten der Module eines Typs (z.B. \texttt{modprobe -lt fs})
+		\end{description}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{depmod}
+	Informationen über Abhängigkeiten der Module sammeln.
+	\begin{description}
+		\item Abhängigkeiten der Module festgehalten in: \path{/lib/modules/KERNEL_VERSION/modules.dep}.
+		\item [Ohne Optionen] \textrightarrow\ neue \texttt{modules.dep} erstellt.
+		\item  [Example] \texttt{depmod} 
+		\item \textbf{Options}
+		
+		\begin{description}
+			\item \texttt{-n} Trockenlauf nach \texttt{stdout} (No new \texttt{modules.dep})
+			\item \texttt{-A} Accelerated mode. Vor erstellung der Datei wird überprüft ob es Module gibt die neuer als \texttt{modes.dep} sind.
+		\end{description}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[File]{modules.dep}
+	Beinhaltet Informationen über Abhängigkeiten der Module.
+	\begin{description}
+		\item Pfad: \path{/lib/modules/KERNEL_VERSION/modules.dep}.
+		\item  [Format] \texttt{/PATH\_TO/Module1.ko:/PATH\_TO/Module2.ko}
+		
+		\begin{description}
+			\item Module1 hängt von Module2 ab.
+		\end{description}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{/proc/sys/kernel}
+	Beinhaltet Informationen über Konfiguration des Kernels
+	\begin{description}
+		\item Wird zur Laufzeit angelegt. \textrightarrow\ Änderungen gehen bei reboot verloren.
+		\item Befindet sich nicht auf der Festplatte, sondern bildet lediglich Informationen aus dem Arbeitsspeicher ab.
+		\item \textbf{Examples}
+		\begin{description}
+			\item \texttt{cat /proc/sys/kernel/osrelease} \textrightarrow\ \texttt{3.13.0-24-generic}
+			
+			\item \texttt{cat /proc/sys/kernel/ostype} \textrightarrow\ \texttt{Linux}
+			
+			\item \texttt{cat /proc/sys/kernel/hostname} \textrightarrow\ \texttt{dwright}
+			
+			\item \texttt{cat /proc/sys/kernel/modprobe} \textrightarrow\ \texttt{/sbin/modprobe}
+		\end{description}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Kernel Source}
+	Befindet sich unter \path{/usr/src/linux-KERNEL_VERSION}
+	\begin{description}
+		\item Softlink nach \path{/usr/src/linux} wird zudem erstellt.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Statischer Teil des Lauffähigen Kernels}
+	Befindet sich unter \path{/boot}
+	\begin{description}
+		\item Softlink nach \path{/boot/vmlinuz} wird zudem erstellt, der auf den tatsächlichen Namen des Kernels zeigt.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Module des Kernels}
+	Befindet sich unter \path{/lib/modules}
+	\begin{description}
+		\item Für jeden installierten Kernel ein Unterverzeichnis.
+		\item Unterverzeichnisse nach der Kernel-Version benannt.
+		\item \textbf{Examples}
+		\begin{description}
+			\item \path{/lib/modules/KERNEL_VERSION/fs} \textrightarrow\ Filesystem-Module
+			
+			\item \path{/lib/modules/KERNEL_VERSION/net} \textrightarrow\ Netzwerkkarten-Module
+			
+			\item \path{/lib/modules/KERNEL_VERSION/scsi} \textrightarrow\ SCSI-Adapter-Module
+			
+			\item \path{/lib/modules/KERNEL_VERSION/video} \textrightarrow\ Grafikkarten-Module
+		\end{description}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[TO DO]{\todo{AB SEITE 30!}}
+\todo{AB SEITE 30!}
 \end{flashcard}
