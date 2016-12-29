@@ -131,17 +131,16 @@
 	\begin{description}
 		\item Wird zur Laufzeit angelegt. \textrightarrow\ Änderungen gehen bei reboot verloren.
 		\item Befindet sich nicht auf der Festplatte, sondern bildet lediglich Informationen aus dem Arbeitsspeicher ab.
-		\item \textbf{Examples}
-		\begin{description}
-			\item \texttt{cat /proc/sys/kernel/osrelease} \textrightarrow\ \texttt{3.13.0-24-generic}
-			
-			\item \texttt{cat /proc/sys/kernel/ostype} \textrightarrow\ \texttt{Linux}
-			
-			\item \texttt{cat /proc/sys/kernel/hostname} \textrightarrow\ \texttt{dwright}
-			
-			\item \texttt{cat /proc/sys/kernel/modprobe} \textrightarrow\ \texttt{/sbin/modprobe}
-		\end{description}
 	\end{description}
+	
+	\textbf{Examples}
+	
+	\begin{tabular}{ll}
+		\path{cat /proc/sys/kernel/osrelease} 		& \texttt{4.4.0-57-generic}\\
+		\path{cat /proc/sys/kernel/ostype} 		& \texttt{Linux}\\
+		\path{cat /proc/sys/kernel/hostname} 	& \texttt{dwright-ubuntu}\\
+		\path{cat /proc/sys/kernel/modprobe} 	& \texttt{/sbin/modprobe}\\
+	\end{tabular}
 \end{flashcard}
 
 \begin{flashcard}[Folder]{Kernel Source}
@@ -165,19 +164,95 @@
 		\item Unterverzeichnisse nach der Kernel-Version benannt.
 		\item Vor Kernel-Version 2.6: Dateiendung \texttt{.o} (Object)
 		\item Nach Kernel-Version 2.6: Dateiendung \texttt{.ko} (Kernel Object)
-		\item \textbf{Examples}
-		\begin{description}
-			\item \path{/lib/modules/KERNEL_VERSION/fs} \textrightarrow\ Filesystem-Module
-			
-			\item \path{/lib/modules/KERNEL_VERSION/net} \textrightarrow\ Netzwerkkarten-Module
-			
-			\item \path{/lib/modules/KERNEL_VERSION/scsi} \textrightarrow\ SCSI-Adapter-Module
-			
-			\item \path{/lib/modules/KERNEL_VERSION/video} \textrightarrow\ Grafikkarten-Module
-		\end{description}
 	\end{description}
+	
+	\textbf{Examples}
+	
+	\begin{tabular}{ll}
+		\path{/lib/modules/KERNEL_VERSION/fs} 		& Filesystem-Module\\
+		\path{/lib/modules/KERNEL_VERSION/net} 		& Netzwerkkarten-Module\\
+		\path{/lib/modules/KERNEL_VERSION/scsi} 	& SCSI-Adapter-Module\\
+		\path{/lib/modules/KERNEL_VERSION/video} 	& Grafikkarten-Module\\
+	\end{tabular}
 \end{flashcard}
 
-\begin{flashcard}[TO DO]{\todo{AB SEITE 30!}}
-\todo{AB SEITE 30!}
+\begin{flashcard}[Folder]{Wo und wie werden physikalische und logische Laufwerke dargestellt?}
+	Als Gerätedateien unterhalb von \texttt{/dev}.
+	
+	\begin{tabular}{ll}
+		\textbf{(E)IDE Laufwerke}	& \texttt{/dev/hdX}\\
+		\textbf{SCSI Laufwerke}		& \texttt{/dev/sdX}\\
+		\textbf{SATA Laufwerke}		& \texttt{/dev/sdX}\\
+	\end{tabular}
+	
+	\caution{Manche Debian Ableger (Ubuntu, Mint, ...)sprechen auch IDE Festplatten unter \texttt{/dev/sdX} an!}
+\end{flashcard}
+
+\begin{flashcard}[Information]{Wie viele Kanäle haben die meisten (E)IDE Controller?\\Wie viele Geräte können daran angeschlossen werden?\\Wie heissen die Gerätedateien?}
+	Zwei Kanäle mit je einem Master und Slave-Laufwerk.
+	
+	\begin{tabular}{ll}
+		\textbf{Primary Master} 	& \texttt{/dev/hda}\\
+		\textbf{Primary Slave} 		& \texttt{/dev/hdb}\\
+		\textbf{Secondary Master} 	& \texttt{/dev/hdc}\\
+		\textbf{Secondary Slave} 	& \texttt{/dev/hdd}\\
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Information]{Wie viele Partitionen können auf einer Festplatte erstellt werden?}
+	Es können gleichzeitig bis zu 4 primäre Partitionen auf einer Festplatte existieren. Erweiterte Partitionen können nicht direkt angesprochen werden. Sie sind nur ein Behälter für Logische Partitionen.
+	\begin{tabular}{lll}
+		& \textbf{IDE} & \textbf{SCSI/SATA}\\
+		\textbf{Primäre Partitionen}	& 4 	& 4 \\
+		\textbf{Erweiterte Partitionen} & 1		& 1 \\
+		\textbf{Logische Partitionen} & 60 & 12\\
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Information]{Wie funktioniert die Nummerierung von Partitionen auf einer Festplatte?}
+	
+	\begin{description}
+	\item Primäre und erweiterte Partitionen werden von 1 bis 4 durchnummeriert. 
+	\item Die erste logische Partition bekommt \textbf{IMMER} die Nummer 5.
+	\end{description}
+
+	
+	\textbf{Example}
+	
+	\begin{tabular}{ll}
+		\texttt{/dev/hda1} & 1. primäre Partition\\
+		\texttt{/dev/hda2} & 2. primäre Partition\\
+		\texttt{/dev/hda3} & einzige erweiterte Partition\\
+		\texttt{/dev/hda5} & 1. logische Partition\\
+		\texttt{/dev/hda6} & 2. logische Partition\\
+		\texttt{/dev/hda7} & 3. logische Partition\\
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{In welchem Verzeichnis wird die aktuelle Konfiguration der Hardwareressourcen abgebildet?}
+	
+	\path{/proc}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Wo befinden sich Informationen über die vom System verwendeten Interrupts?}
+	
+	\path{/proc/interrupts}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Wo befinden sich Informationen über die vom System verwendeten I/O-Adressen?}
+	
+	\path{/proc/ioports}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Wo befinden sich Informationen über die von Geräten verwendeten DMA-Kanäle?}
+	
+	\path{/proc/dma}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Wo befinden sich Informationen über die den PCI-Bus?}
+	
+	\begin{tabular}{ll}
+		\texttt{/proc/pci} & Bei älteren Kernel-Versionen\\
+		\texttt{/proc/bus/pci} & Bei neueren Kernel-Versionen\\
+	\end{tabular}
 \end{flashcard}
