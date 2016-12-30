@@ -8,8 +8,8 @@
 \geometry{landscape, margin=0pt}
 
 % Line spacing in itemize/enumeration/description
-\usepackage{enumitem}
-\setlist{noitemsep}
+%\usepackage{enumitem}
+%\setlist{noitemsep}
 
 % Language Package
 \usepackage[UKenglish]{babel}
@@ -65,9 +65,18 @@
 \usepackage{listings}
 % Listings Captions
 \DeclareCaptionFont{white}{\color{white}}
-\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth-1cm}{#1#2#3}}}
 \captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
 % using captions: \begin{lstlisting}[label = some-code, caption = some code]...\end{lstlisting}
+
+%\lstset{
+%	basicstyle={\scriptsize\ttfamily},
+%	breaklines        = true,
+%	breakatwhitespace = true,
+%	breakindent       = 2ex,
+%	escapechar        = *,
+%	numbers           = none
+%}
 
 %% MATLAB 
 \lstdefinestyle{matlab}{
@@ -116,15 +125,15 @@
   belowcaptionskip=1\baselineskip,
   breaklines=true,
   postbreak={\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}},
-  frame=single,
+%  frame=single,
   xleftmargin=\parindent,
-  numbers = left,
+%  numbers = left,
   language=bash,
   commentstyle=\bfseries\color{green!80!black},
   showstringspaces=false,
   basicstyle=\scriptsize\ttfamily,
   keywordstyle=\bfseries\color{blue},
-%  commentstyle=\itshape\color{purple!40!black},
+  commentstyle=\itshape\color{purple!40!black},
 %  identifierstyle=\color{blue},
   stringstyle=\color{pink!85!yellow!80!red},
   rulecolor=\color{black}

@@ -185,7 +185,7 @@
 		\textbf{SATA Laufwerke}		& \texttt{/dev/sdX}\\
 	\end{tabular}
 	
-	\caution{Manche Debian Ableger (Ubuntu, Mint, ...)sprechen auch IDE Festplatten unter \texttt{/dev/sdX} an!}
+	\caution{Manche Debian Ableger (Ubuntu, Mint, ...) sprechen auch IDE Festplatten unter \texttt{/dev/sdX} an!}
 \end{flashcard}
 
 \begin{flashcard}[Information]{Wie viele Kanäle haben die meisten (E)IDE Controller?\\Wie viele Geräte können daran angeschlossen werden?\\Wie heissen die Gerätedateien?}
@@ -230,22 +230,20 @@
 \end{flashcard}
 
 \begin{flashcard}[Folder]{In welchem Verzeichnis wird die aktuelle Konfiguration der Hardwareressourcen abgebildet?}
-	
 	\path{/proc}
 \end{flashcard}
 
 \begin{flashcard}[Folder]{Wo befinden sich Informationen über die vom System verwendeten Interrupts?}
-	
 	\path{/proc/interrupts}
 \end{flashcard}
 
 \begin{flashcard}[Folder]{Wo befinden sich Informationen über die vom System verwendeten I/O-Adressen?}
-	
 	\path{/proc/ioports}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/procIOPortsInfo.sh}
 \end{flashcard}
 
 \begin{flashcard}[Folder]{Wo befinden sich Informationen über die von Geräten verwendeten DMA-Kanäle?}
-	
 	\path{/proc/dma}
 \end{flashcard}
 
@@ -255,4 +253,99 @@
 		\texttt{/proc/pci} & Bei älteren Kernel-Versionen\\
 		\texttt{/proc/bus/pci} & Bei neueren Kernel-Versionen\\
 	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Wo befinden sich Informationen über angeschlossene SCSI-Geräte?}
+	\path{/proc/scsi}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/procScsiInfo.sh}
+\end{flashcard}
+
+\begin{flashcard}[Folder]{Wo befinden sich Informationen über angeschlossene USB-Geräte?}
+	\path{/proc/scsi/usb-storage}
+	
+	USB-Geräte werden ähnlich gehandhabt wie SCSI-Geräte und deshalb auch in diesem Ordner abgebildet.
+	
+	\lstinputlisting[style=bash, title=Example]{./src/procUSBInfo.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie findet man informationen über den PCI-Bus?}
+	\texttt{lspci}
+
+	\begin{description}	
+	\item \textbf{Options}
+	
+		\begin{description}
+			\item \texttt{-v} Verbose (3 Stufen möglich)
+			
+			\item \texttt{-t} Tree, stellt die informationen in Baumstruktur dar
+		\end{description}
+	\end{description}
+	\lstinputlisting[style=bash, title=Example]{./src/lspci.sh}
+\end{flashcard}
+
+\begin{flashcard}[Information]{Wie heissen die USB-Controller Typen und deren Treiber?}
+	\begin{tabular}{lll}
+		USB 1.1 & OHCI, UHCI & \texttt{usb-ohci.o}, \texttt{usb-uhci.o}\\
+		USB2.0 & EHCI & \texttt{usb-ehci.o}\\
+	\end{tabular}
+	
+	Die Abkürzungen stehen für: \{Open, Universal, Enhanced\} Host Controller Interface
+\end{flashcard}
+
+
+\begin{flashcard}[Information]{Nenne ein paar Beispiele für USB-Klassen und deren Klassenreiber?}
+	\begin{tabular}{ll}
+		HID 		& \texttt{usbhid.ko}\\
+		Storage 	& \texttt{usb-storage.ko}\\
+		Bluetooth 	& \texttt{btusb.ko}
+	\end{tabular}
+	
+	Die Abkürzungen stehen für: \{Open, Universal, Enhanced\} Host Controller Interface
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie findet man Informationen über geladene Module und deren Treiber?}
+	\texttt{lsmod}
+	
+	\begin{description}
+	\item Die Spalte ganz rechts listet die Treiber auf.
+	
+	\item Filtern mit z.B. \texttt{lsmod | grep usb}
+	\end{description}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/lsmod.sh}
+	
+	
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie findet man Informationen über angeschlossene USB-Geräte?}
+	\texttt{lsusb}
+	
+	\begin{description}
+		\item \textbf{Options}
+		
+		\begin{description}
+			\item \texttt{-v} Verbose
+			
+			\item \texttt{-t} Tree, stellt die informationen in Baumstruktur dar
+			
+			\item \texttt{-s [[bus]:][dev]} Nur spezifizierte Bus und/oder Device Nr. anzeigen.
+			
+			\item \texttt{-d [ven]:[prod]} Nur spezifizierte Vendor und Product ID anzeigen.
+		\end{description}
+	\end{description}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/lsusb.sh}
+\end{flashcard}
+
+\begin{flashcard}[Daemon]{Welche Mechanismen gibt es, um USB-Treiber automatisch zu laden?\\Welcher ist weiter verbreitet?}	
+	\begin{tabular}{ll}
+	\texttt{usbmgr} 	& \\
+	\texttt{hotplug} 	& \textleftarrow\ Wesentlich weiter verbreitet\\
+	\end{tabular}
+\end{flashcard}
+
+
+\begin{flashcard}[TO DO]{\todo{AB SEITE 36}}	
+	\todo{AB SEITE 36}
 \end{flashcard}
