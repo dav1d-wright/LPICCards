@@ -1,0 +1,132 @@
+\renewcommand{\sect}{103 GNU- und Unix-Kommandos}
+
+\cardfrontfoot{\chap/\sect}
+
+\begin{flashcard}[Information]{Was sind die Komponenten eines Kommandos?}
+	Ein Kommando hat bis zu 3 Komponenten
+	
+	\begin{tabular}{ll}
+		\textbf{Komponente}	& \textbf{Beispiel}\\
+		Das Kommando selbst & \texttt{mount}\\
+		Optionen 			& \texttt{mount -a}\\
+		Argumente			& \texttt{mount /dev/hda1 /boot}
+	\end{tabular}
+	
+	\caution{In den Beispielen werden Argumente und Optionen imm Kontext eines Kommandos dargestellt. Mount gehört nicht zur Option oder zum Argument!}
+\end{flashcard}
+
+\begin{flashcard}[Information]{Was sind gängige Methoden zur Übergabe von Optionen an Kommandos?}
+	\begin{description}
+		\item Mit vorangehendem Bindestrich
+		
+		\item Ohne vorangehenden Bindestrich
+		
+		\item Ganze Wörter (in der Regel mit zwei vorangehenden Bindestrichen)
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Information]{Was sind Unterschiede zwischen Shellvariabeln und Umgebungsvariabeln?}
+	\begin{tabular}{ll}
+		\textbf{Umgebungsvariabeln} & \textbf{Shellvariabeln}\\
+		Gelten für alle Shells  & Müssen für jede Subshell neu deklariert werden\\
+		Üblicherweise Grossbuchstaben	& Üblicherweise Kleinbuchstaben
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[File]{Was ist die Aufgabe von \path{/etc/profile}?}
+	\begin{description}
+		\item Konfigurationsdatei für Umgebungsvariabeln und erste \texttt{PATH}-Anweisung.
+		
+		\item Wird bei der Anmeldung eines Benutzers gelesen \textrightarrow Bei Änderungen Neuanmeldung nötig
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[File]{Was ist die Aufgabe von \path{/etc/.bashrc}?}
+	\begin{description}
+		\item Konfigurationsdatei für systemweite Einstellungen, Umgebungsvariabeln Aliases und Funktionen.
+		
+		\item Wird beim Start jeder neuen Shell gelesen.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[File]{Was ist die Aufgabe von \path{~/.bash_profile}?}
+	\begin{description}
+		\item Nicht immer vorhanden.
+		
+		\item Konfigurationsdatei für benutzerspezifische Umgebungsvariabeln, weitere \texttt{PATH}-Anweisungen und den zu verwendeten Standard-Editor.
+		                                                                                                      
+		\item Wird bei der Anmeldung eines Benutzers sofort nach \path{/etc/profile} gelesen \textrightarrow Bei Änderungen Neuanmeldung nötig 
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[File]{Was ist die Aufgabe von \path{~/.bash_login}?}
+	\begin{description}
+		\item Alternative zu \path{~/.bash_profile}. Wird nur gelesen wenn diese nicht vorhanden ist. Inhalt und Zweck sind in beiden Files gleich.
+		
+		\item Nicht immer vorhanden.
+		
+		\item Konfigurationsdatei für benutzerspezifische Umgebungsvariabeln, weitere \texttt{PATH}-Anweisungen und den zu verwendeten Standard-Editor.
+		
+		\item Wird bei der Anmeldung eines Benutzers sofort nach \path{/etc/profile} gelesen \textrightarrow Bei Änderungen Neuanmeldung nötig 
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[File]{Was ist die Aufgabe von \path{~/.profile}?}
+	\begin{description}
+		\item Ursprüngliche Konfigurationsdatei der Bash.
+		
+		\item Wird nur gelesen wenn weder \path{~/.bash_profile} noch \path{~/.bash_login} vorhanden sind. Inhalt und Zweck sind in allen drei Files gleich.
+		
+		\item Nicht immer vorhanden.
+		
+		\item Konfigurationsdatei für benutzerspezifische Umgebungsvariabeln, weitere \texttt{PATH}-Anweisungen und den zu verwendeten Standard-Editor.
+		
+		\item Wird bei der Anmeldung eines Benutzers sofort nach \path{/etc/profile} gelesen \textrightarrow Bei Änderungen Neuanmeldung nötig 
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[File]{Was ist die Aufgabe von \path{~/.bashrc}?}
+	\begin{description}
+		\item Ursprüngliche Konfigurationsdatei der Bash.
+		
+		\item Wird beim Start jeder neuen Shell gelesen.
+		
+		\item Konfigurationsdatei für Aliases und Funktionen.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[File]{Was ist die Aufgabe von \path{~/.bash_logout}?}
+	\begin{description}
+		\item Optionale Datei, die bei der Abmeldung eines Benutzers gelesen werden.
+		
+		\item Z.B. könnte sie den Monitor löschen.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie können die gesetzten Shellvariabeln angezeigt werden?}
+	\texttt{set}
+	
+	\begin{description}
+		\item \textbf{Options}
+		
+		\begin{description}
+			\item \todo{options here}
+		\end{description}
+	\end{description}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/set.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann in der Kommandozeile eine Variable deklariert werden?}
+	\lstinputlisting[style=bash, title=Example]{./src/shellVar.sh}
+	
+	Wie im Beispiel sieht wird die Variable nicht automatisch an Subshells vererbt. Um die Variable zu vererben, muss vor dem aufruf der Bash das Kommando \texttt{export x} ausgeführt werden.
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann eine Variable Exportiert werden?}
+	\lstinputlisting[style=bash, title=Example]{./src/export.sh}
+\end{flashcard}
+
+\begin{flashcard}[TO DO]{\todo{AB SEITE 92}}	
+	\todo{AB SEITE 92}
+\end{flashcard}
