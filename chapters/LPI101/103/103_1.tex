@@ -123,10 +123,61 @@
 	Wie im Beispiel sieht wird die Variable nicht automatisch an Subshells vererbt. Um die Variable zu vererben, muss vor dem aufruf der Bash das Kommando \texttt{export x} ausgeführt werden.
 \end{flashcard}
 
-\begin{flashcard}[Command]{Wie kann eine Variable Exportiert werden?}
+\begin{flashcard}[Command]{Wie kann eine Variable exportiert werden?}
 	\lstinputlisting[style=bash, title=Example]{./src/export.sh}
+	\caution{Prüfungsrelevant: Eine Variable kann niemals in eine übergeordnete Shell exportiert werden! Nur in eine Subshell.}
 \end{flashcard}
 
-\begin{flashcard}[TO DO]{\todo{AB SEITE 92}}	
-	\todo{AB SEITE 92}
+\begin{flashcard}[Command]{Wie kann der Inhalt einer Variabeln zurückgesetzt werden?}
+	\lstinputlisting[style=bash, title=Example]{./src/unset.sh}
+\end{flashcard}
+
+\begin{flashcard}[Variable]{Was ist die Aufgabe von \texttt{\$HISTSIZE} und wo wird sie definiert?}
+	\begin{description}
+		\item Beinhaltet die Anzahl Kommandos, die in der Befehls-History gespeichert werden.
+		
+		\item Wird normalerweise in \path{/etc/profile} festgelegt.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Variable]{Was ist die Aufgabe von \texttt{\$PS1} und wo wird sie definiert?}
+	\begin{description}
+		\item Legt das aussehen des Command-Prompts fest
+		
+		\item Wird normalerweise in \path{/etc/bashrc} festgelegt.
+	\end{description}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/ps1.sh}
+	
+	Note: \textbackslash u steht für User, @ wird so ausgegeben, \textbackslash h steht für Host, Doppelpunkt wird auch so ausgegeben, \textbackslash w steht für Working Directory, \\\$ gibt das Dollar-Zeichen aus.
+\end{flashcard}
+
+\begin{flashcard}[Variable]{Was ist die Aufgabe von \texttt{\$?}, \texttt{\$1}, \texttt{\$2}, usw?}
+	\begin{description}
+		\item \texttt{\$?} beinhaltet den Error-Level des zuletzt ausgeführten Commands. z.B. 0 für kein Fehler, 127 für Command not found
+		
+		\item \texttt{\$1}, \texttt{\$2}, usw beinhalten die 1., 2., ... Übergabeparameter eines Programms.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Welche Methoden gibt es, um die Command-History zu verwenden?}
+	\begin{tabular}{lp{0.6\linewidth}}
+		\texttt{cursor up}			& Kommandos werden in umgekehrter Reihenfolge angezeigt.\\
+		
+		\texttt{!!}					& Bang-Bang, führt letzten Befehl der History nochmals aus.\\
+		
+		\texttt{history}			& Gibt nummerierte Liste mit den zuletzt verwendeten Befehlen aus.\\
+		
+		\texttt{!n-}				& Führt das n-te Kommando aus der nummerierten Liste von \texttt{history} aus. (Beginnt oben) \\
+
+		\texttt{!-n}				& Führt das letzte Kommando - n aus. \texttt{!-2} führt das vorletzte Kommando aus.\\
+				
+		\texttt{!<STRING>}	& führt das letzte Kommando aus, das mit \texttt{<STRING>} beginnt.\\
+		
+		\texttt{!?<STRING>}	& Führt das letzte Kommando aus, in dem \texttt{<STRING>} vorkommt.
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[TO DO]{\todo{AB SEITE 94}}	
+	\todo{AB SEITE 94}
 \end{flashcard}
