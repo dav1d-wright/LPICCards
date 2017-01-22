@@ -1,4 +1,4 @@
-cat /proc/ioports
+dwright@dwright-ubuntu:~$ cat /proc/ioports
 
 0000-0cf7 : PCI Bus 0000:00
   0000-001f : dma1

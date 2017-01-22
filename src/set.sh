@@ -1,4 +1,4 @@
-set | less
+dwright@dwright-ubuntu:~$ set | less
 
 BASH=/bin/bash
 BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extglob:extquote:force_fignore:histappend:interactive_comments:progcomp:promptvars:sourcepath

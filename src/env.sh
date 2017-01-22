@@ -1,4 +1,4 @@
-env | less
+dwright@dwright-ubuntu:~$ env | less
 
 LC_PAPER=en_AU.UTF-8
 XDG_VTNR=2

@@ -1,7 +1,7 @@
-wrd@wrd-VirtualBox:~$ variable=VALUE
-wrd@wrd-VirtualBox:~$ echo $variable
+dwright@dwright-ubuntu:~$ variable=VALUE
+dwright@dwright-ubuntu:~$ echo $variable
 VALUE
-wrd@wrd-VirtualBox:~$ unset variable
-wrd@wrd-VirtualBox:~$ echo $variable
+dwright@dwright-ubuntu:~$ unset variable
+dwright@dwright-ubuntu:~$ echo $variable
 
-wrd@wrd-VirtualBox:~$ 
+dwright@dwright-ubuntu:~$

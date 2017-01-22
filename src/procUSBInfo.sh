@@ -1,4 +1,4 @@
-cat /proc/scsi/usb-storage/0 
+dwright@dwright-ubuntu:~$ cat /proc/scsi/usb-storage/0 
    Host scsi0: usb-storage
        Vendor: Apple
       Product: Card Reader

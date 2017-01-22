@@ -1,4 +1,4 @@
-lspci -v
+dwright@dwright-ubuntu:~$ lspci -v
 01:00.0 VGA compatible controller: NVIDIA Corporation GK107M [GeForce GT 750M Mac Edition] (rev a1) (prog-if 00 [VGA controller])
 	Subsystem: Apple Inc. GK107M [GeForce GT 750M Mac Edition]
 	Flags: bus master, fast devsel, latency 0, IRQ 40

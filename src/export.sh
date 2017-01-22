@@ -1,3 +1,3 @@
-wrd@wrd-VirtualBox:~$ variable=VALUE
-wrd@wrd-VirtualBox:~$ export variable
-wrd@wrd-VirtualBox:~$ export variable2=VALUE2
+dwright@dwright-ubuntu:~$ variable=VALUE
+dwright@dwright-ubuntu:~$ export variable
+dwright@dwright-ubuntu:~$ export variable2=VALUE2

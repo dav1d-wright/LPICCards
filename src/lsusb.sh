@@ -1,4 +1,4 @@
-lsusb -t
+dwright@dwright-ubuntu:~$ lsusb -t
 /:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/6p, 5000M
     |__ Port 4: Dev 2, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
 /:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/14p, 480M

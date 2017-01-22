@@ -1,4 +1,4 @@
-cat /proc/scsi/scsi
+dwright@dwright-ubuntu:~$ cat /proc/scsi/scsi
 
 Attached devices:
 Host: scsi1 Channel: 00 Id: 00 Lun: 00

@@ -1,4 +1,4 @@
-lsmod
+dwright@dwright-ubuntu:~$ lsmod
 Module                  Size  Used by
 input_polldev          	16384  	1 applesmc
 snd_hda_codec_hdmi     	53248  	1

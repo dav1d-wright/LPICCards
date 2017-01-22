@@ -12,7 +12,7 @@
 		Argumente			& \texttt{mount /dev/hda1 /boot}
 	\end{tabular}
 	
-	\caution{In den Beispielen werden Argumente und Optionen imm Kontext eines Kommandos dargestellt. Mount gehört nicht zur Option oder zum Argument!}
+	\caution{In den Beispielen werden Argumente und Optionen im Kontext eines Kommandos dargestellt. Mount gehört nicht zur Option oder zum Argument!}
 \end{flashcard}
 
 \begin{flashcard}[Information]{Was sind gängige Methoden zur Übergabe von Optionen an Kommandos?}
@@ -178,6 +178,357 @@
 	\end{tabular}
 \end{flashcard}
 
-\begin{flashcard}[TO DO]{\todo{AB SEITE 94}}	
-	\todo{AB SEITE 94}
+\begin{flashcard}[Command]{Was ist der Ablauf, wenn ein Kommando ohne angabe des Pfades ausgeführt wird?}
+	\begin{enumerate}
+		\item Shell prüft, ob es ein internes Kommando der Shell ist, wie z.B. \texttt{echo}, \texttt{bg}, \texttt{fg} etc.
+		
+		\item Falls kein passendes Kommando gefunden wird, wird die \texttt{PATH}-Variable durchsucht.
+		
+		\item Falls mehrere mit dem selben Namen gefunden werden, wird das erste ausgeführt. In einem solchen Fall kann das Kommando \texttt{which} verwendet werden.
+	\end{enumerate}
+	
+	\caution{Ein Programm wird auch dann nicht ohne Pfadangabe ausgeführt, wenn man sich aktuell in dessen Verzeichnis befindet. \textrightarrow \texttt{./} vorangeben.}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/which.sh}
+\end{flashcard}
+
+
+\begin{flashcard}[Command]{Wie kann man das aktuelle Verzeichnis ausgeben?}
+	\texttt{pwd}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/pwd.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann man den Inhalt der \texttt{PATH}-Variable ausgeben?}
+	\texttt{echo \$PATH}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/path.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie benutzt man die Manpages?}
+	\texttt{man <COMMAND>}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/man.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Mit welchem Kommando findet man den aktuellen \texttt{MANPATH} und das Cache-Verzeichnis von \texttt{man}?}
+	\texttt{manpath}
+	
+	\begin{description}
+		\item Für \texttt{MANPATH}: Ohne Optionen
+		
+		\item Für Cache-Verzeichnis (\texttt{catpath}):  \texttt{manpath -c}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Information]{Was sind die Sektionen der Manpages?}
+	\begin{tabular}{lp{0.6\linewidth}}
+		1 & Ausführbare Programme für den Benutzer \\
+		2 & Systemaufrufe (Funktionen, die durch den Kernel unterstützt werden)\\
+		3 & Bibliothekaufrufe (Libraries)\\
+		4 & besondere Dateien (normalerweise in \texttt{/dev})\\
+		5 & Dateiformate und Konventionen\\
+		6 & Spiele\\
+		7 & Sonstiges (Makro-Pakete und Konventionen)\\
+		8 & administrative Programme (nur für Root)\\
+		9 & Kernel-Routinen\\
+		A & mehrteilige Manpages
+	\end{tabular}
+	
+	Falls ein Programm in mehrere dieser Sektionen fällt ist der Aufruf für das Kommando: \texttt{man <SECTION> <COMMAND>}.
+\end{flashcard}
+
+\begin{flashcard}[Information]{Wie ist der Aufbau der Manpages?}
+	\begin{tabular}{lp{0.6\linewidth}}
+		\textit{Name} & Bezeichnung des Elementes und kurze Beschreibung\\
+		\textit{Synopsis} & Vollständige Kurzbeschreibung der Syntax\\
+		\textit{Description} & Ausführliche Beschreibung des Elementes\\
+		\textit{Overview} & Überblick über die Komplexeren Zusammenhänge\\
+		\textit{Options} & Optionen und deren Beschreibung\\
+		\textit{Return Values} & Rückgabewerte aka Exit-Status\\
+		\textit{See also} & Verweise auf artverwandte Themen\\
+		\textit{Bugs} & Bekannte Fehler\\
+		\textit{Files} & Konfigurationsdateien u. Ä.\\
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann man die Manpages nach Programmen durchsuchen?}
+	\begin{tabular}{lp{0.5\linewidth}}
+		\texttt{whatis <COMMAND>} & Durchsucht nur das Feld \textit{Name}.\\
+		\texttt{apropos <COMMAND\_OR\_DESCRIPTION>} & Durchsucht die Felder \textit{Name} und \textit{Description}.
+	\end{tabular}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/whatis_apropos.sh}
+\end{flashcard}
+
+
+\begin{flashcard}[Command]{Wie findet man Informationen über die Verzeichnisse eines Programms, dessen Konfigurationsdateien und Manpages?}
+	\texttt{whereis}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/whereis.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie können Textdateien in der Shell ausgegeben, an ein Programm umgeleitet oder miteinander verbunden werden?}
+	\texttt{cat}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/cat.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie können Textdateien umgekehrt ausgegeben werden?}
+	\texttt{tac}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann man die ersten \texttt{n} Zeilen einer Textdatei anzeigen?}
+	\texttt{head -n  <FILE>}
+	
+	Ohne Option werden per Default die ersten 10 Zeilen ausgegeben.
+	
+	Es können auch mehrere Files angegeben werden.
+	
+	\lstinputlisting[style=bash, title=Example]{./src/head.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann man die letzten \texttt{n} Zeilen einer Textdatei anzeigen?}
+	\texttt{head -n  <FILE>}
+	
+	Ohne Option werden per Default die letzten 10 Zeilen ausgegeben.
+	
+	Es können auch mehrere Files angegeben werden.
+	
+	\lstinputlisting[style=bash, title=Example]{./src/tail.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann man die letzten Zeilen einer Textdatei fortlaufend anzeigen während ein anderes Programm auf diese Datei schreibt?}
+	\texttt{tail -f <FILE>}
+	
+	Besonders beliebt (auch für die Prüfung) mit \texttt{/var/log/syslog} oder \texttt{/var/log/messages}.
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann man den Befehl \texttt{less} verwenden?}
+	\texttt{less <FILE>}
+	
+	\texttt{less} ist ein Pager, der ein Textfile anzeigen kann. Es liest nicht immer das ganze File ein, und kann nach oben und unten navigieren, im Gegensatz zum älteren \texttt{more}.
+	
+	\textbf{Befehlsbeispiele:}
+	
+	\begin{description}
+		\item \texttt{/<STRING>} Vorwärtssuche, sprint zum nächsten Auftreten von \texttt{STRING} in Vorwärtsrichtung.
+		
+		\item \texttt{?<STRING>} Rückwärtssuche, sprint zum nächsten Auftreten von \texttt{STRING} in Rückwärtsrichtung.
+		
+		\item \texttt{n} Springt zum nächsten Auftreten der letzten Suche (abhängig von Suchrichtung / oder ?).
+		
+		\item \texttt{N} Springt zum vorhergehenden Auftreten der letzten Suche (abhängig von Suchrichtung / oder ?).
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie können in einem Textfile Tabstopps in Leerzeichen umgewandelt werden oder umgekehrt?}
+	\begin{tabular}{cc}
+		tabs \textrightarrow spaces & spaces \textrightarrow tabs\\
+		\texttt{expand} & \texttt{unexpand}
+	\end{tabular}
+	
+	\vspace{0.5cm}
+	
+	Für beide Kommandos ist standardmässig das Äquivalent für einen Tabstopp 8 Leerzeichen. Dies kann mit der Option -t angepasst werden.
+	
+	\vspace{0.5cm}
+	
+	Hier bietet es sich an, die Ausgabe von \texttt{stdout} in ein File umzuleiten:
+	
+	\texttt{expand textfile1 > textfile2}.
+\end{flashcard}
+
+\begin{flashcard}[Command]{fmt}
+	\begin{description}
+		\item Textformatierungsprogramm.
+		
+		\item Entfernt automatisch Zeilenumbrüche.
+		
+		\item Parameter -w um die Breite (width) des Textes anzugeben.
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{nl}
+	\begin{description}
+		\item Nummeriert die Zeilen eines Dokumentes (Number Lines).
+		
+		\item Ausgabe Standardmässig nach \texttt{stdout}, Umleitung in anderes Dokument von Vorteil.
+		
+		\item \caution{Nicht zu verwechseln mit \texttt{ln} (Links erstellen).}
+	\end{description}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann man eine Datei für den Druck vorbereiten?}
+	\texttt{pr}
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{lp{0.8\linewidth}}
+		\texttt{-h <HEADER\_STRING>}	& Titel für Druckheaderzeile \\
+		\texttt{-W} 					& Seitenbreite (width)\\
+		\texttt{-l}						& Seitenlänge\\
+	\end{tabular}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/pr.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{wc}
+	Zählt die Anzahl Wörter einer oder mehreren Dateien.
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{lp{0.8\linewidth}}
+		\texttt{-c} & Zeigt nur die Anzahl der Bytes.\\
+		\texttt{-l} & Zeigt nur die Anzahl der Zeilen (lines).\\
+		\texttt{-w} & Zeigt nur die Anzahl der Wörter.\\
+		\texttt{-m} & Zeigt nur die Anzahl der Zeichen.\\
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Command]{hexdump}
+	Dateien in Hexadezimal-, Dezimal-, Oktal-, oder ASCII-Format anzeigen.
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{lp{0.8\linewidth}}
+		\texttt{-b} & One-byte octal display. Stellt jeweils ein Byte im Oktalformat dar.\\
+		\texttt{-c} & One-byte character display. Stellt jeweils ein Byte als Charakter dar.\\
+		\texttt{-C} & Canonical hex+ASCII display. Stellt jeweils ein Byte im Hex-Format dar, und fügt am Schluss die Zeile in ASCII-Format hinzu.\\
+		\texttt{-d} & Two-byte decimal display. Stellt jeweils zwei Bytes im Dezimalformat dar.\\
+	\end{tabular}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/hexdump.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{od}
+	Octaldump. Dateien in Hexadezimal-, Dezimal-, Oktal-, oder ASCII-Format anzeigen.
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{lp{0.8\linewidth}}
+		\texttt{-x} & Two-byte hex display. Stellt jeweils zwei Bytes im Hex-Format dar.\\
+		\texttt{-a} & One-byte character display. Stellt jeweils ein Byte als Charakter dar.\\
+		\texttt{-b} & One-byte octal display. Stellt jeweils ein Byte im Oktal-Format dar.\\
+		\texttt{-d} & Two-byte decimal display. Stellt jeweils zwei Bytes im Dezimalformat dar.\\
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Command]{sort}
+	Zeilen in einer Datei oder andere Eingabequellen sortieren.
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{lp{0.8\linewidth}}
+		\texttt{-n} & Sortiert nach numerischen Kriterien\\
+		\texttt{-o} & Outfile. Ausgabe in eine Datei. Standardmässig wird nach \texttt{stdout} ausgegeben.\\
+		\texttt{-r} & Reverse. Ausgabe in umgekehrter Reihenfolge.\\
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Command]{uniq}
+	Wiederholte Zeilen in einer Datei löschen. Voraussetzung ist, dass diese Zeilen auf einander folgen.
+	
+	Sollten die Zeilen nicht auf einander folgen, kann z.B. \texttt{sort} vorgeschalten werden.
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie können Dateien in kleinere Dateien aufgeteilt, und wieder zusammengefügt werden?}
+	\texttt{split} und \texttt{cat}
+	
+	\begin{description}
+		\item	\texttt{split} arbeitet per Default in zeilenorientiert (ohne Optionen aufgeteilt in Dateien mit je 1000 Zeilen). 
+		
+		\item	Mit der Option \texttt{-l} kann die Anzahl Zeilen (lines) und mit \texttt{-b} die Anzahl Bytes für die aufgeteilten Dateien festgelegt werden
+	\end{description}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/split_cat.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{cut}
+	Spalten aus einer Textdatei ausschneiden.
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{lp{0.8\linewidth}}
+		\texttt{-d} & Delimiter.\\
+		\texttt{-f} & Fields. Definiert welche Spalten ausgeschnitten werden sollen.\\
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Command]{paste}
+	Textdateien nebeneinander zusammenfügen
+\end{flashcard}
+
+\begin{flashcard}[Command]{join}
+	Textdateien nebeneinander zusammenfügen, kann im Gegensatz zu \texttt{paste} einen gemeinsamen Nenner der verknüpften Dateien Festlegen.
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{lp{0.8\linewidth}}
+		\texttt{-t} & Delimiter.\\
+		\texttt{-j} & Definiert den gemeinsamen Nenner.
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[Command]{tr}
+	Einzelne Zeichen durch andere ersetzen oder löschen.
+	
+	Es können keine Textdateien als Argument übergeben werden, deshalb müssen solche mit \texttt{cat foo.txt | tr x y} übergeben werden.
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{llp{0.8\linewidth}}
+		\texttt{-d} & \texttt{--delete} & Löschen des Zeichens.\\
+		\texttt{-c} & \texttt{--complement} & Kehrt die Ausgabe ins Gegenteil.\\
+		\texttt{-s} & \texttt{--squeeze-repeats} & Unterdrückt wiederholende Zeichen.
+	\end{tabular}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/tr.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann der Inhalt eines Verzeichnisses aufgelistet werden?}
+	\texttt{ls}
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{lp{0.8\linewidth}}
+		\texttt{-l} & Listing Format, beinhaltet u.A. Zugriffsrechte und Timestamps.\\
+		\texttt{-i} & Zeigt die verwendeten Inodes.\\
+		\texttt{-a} & Zeigt alle Dateien an, auch hidden Files/Folders.\\
+		\texttt{-s} & Zeigt die Grösse jeder Datei in Blocks an. Setzt \texttt{-l} voraus.\\
+		\texttt{-h} & Zeigt die Grösse jeder Datei in Menschenlesbarem Format an (z.B. 21KB, 24MB, 3GB). Setzt \texttt{-l} voraus.
+	\end{tabular}
+	
+	\lstinputlisting[style=bash, title=Example]{./src/ls.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie kann das aktuelle Verzeichnis gewechselt werden?}
+	\texttt{cd}	(Change Directory)
+	
+	Bei verwendung des Kommandos ohne Optionen und Argumente wechselt \texttt{cd} in das Home Directory
+	
+	\lstinputlisting[style=bash, title=Example]{./src/cd.sh}
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wofür steht die Tilde (\texttildelow)?}
+	Für das Heimatverzeichnis (home directory) des aktuellen Users.
+\end{flashcard}
+
+\begin{flashcard}[Command]{Wie können Dateien und Verzeichnisse kopiert werden?}
+	\texttt{cp}
+	
+	Es müssen immer Quell- und Zielobjekte angegeben werden. Dabei ist das letzte immer das Ziel.
+	
+	\textbf{Options:}
+	
+	\begin{tabular}{llp{0.65\linewidth}}
+		\texttt{-i} & \texttt{--interactive} & Fragt vor dem Überschreiben bei eventuell bereits existierender Zielobjekte nach..\\
+		\texttt{-f} & \texttt{--force} & Erzwingt den Schreibvorgang im Zielverzeichnis.\\
+		\texttt{-p} & \texttt{--preserve} & Kopiert Dateien unter Beibehaltung des Eigentümers, der Eigentümergruppe, der Berechtigungen und Timestamps.\\
+		\texttt{-R} \texttt{-r} & \texttt{--recursive} & Kopiert ein Verzeichnis inklusive aller Unterverzeichnisse und Dateien.
+	\end{tabular}
+\end{flashcard}
+
+\begin{flashcard}[TO DO]{\todo{AB SEITE 115 (mv)}}	
+	\todo{AB SEITE 115 (mv)}
 \end{flashcard}
